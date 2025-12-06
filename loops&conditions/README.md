@@ -1,0 +1,117 @@
+# Loops & Conditions
+
+This folder explores control flow in Go: loops for iteration and conditionals for decision-making.
+
+## What's Inside
+
+- `main.go`: Examples of `for` loops (while-style, classic, range), `if-else` statements, `switch` cases (simple, multiple conditions, type switch).
+- Focus: Understanding Go's unified looping construct and branching patterns.
+
+## Key Concepts
+
+### Loops
+
+- **`for` is the only loop construct**: Go has no `while` or `do-while`; use `for` for all looping.
+- **While-style**: `for condition { }` loops while condition is true.
+- **Classic for**: `for init; condition; increment { }` works like C-style loops.
+- **Range**: `for i := range n { }` iterates from 0 to n-1 (Go 1.22+).
+- **Infinite loop**: `for { }` runs forever unless broken.
+
+### Conditionals
+
+- **If-Else**: Standard branching with optional variable declaration in condition.
+- **If-Else If**: Chain multiple conditions; only first true block executes.
+- **Switch-Case**: Cleaner than many if-else; no break needed (auto-break by default).
+- **Multiple conditions**: `case a, b, c:` matches any of these values.
+- **Type switch**: `switch v := x.(type) { }` branches on dynamic type.
+
+## Run The Example
+
+```powershell
+cd "D:\my\GUNJAN\Gunjan Go\learning\loops&conditions"
+go run main.go
+```
+
+## Notes
+
+- Use `for` uniformly; it's simpler than having multiple loop keywords.
+- Switch is often clearer than deeply nested if-else.
+
+## Examples (सरल हिन्दी व्याख्या)
+
+नीचे बहुत ही बुनियादी उदाहरण दिए गए हैं ताकि सिंटैक्स समझ में आए। विस्तृत कोड पहले से `main.go` में मौजूद है।
+
+### While-Style Loop (जब तक लूप)
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    i := 1
+    for i <= 5 {           // जब तक i 5 से कम या बराबर है
+        fmt.Println(i)     // i को प्रिंट करो
+        i++                // i को बढ़ाओ
+    }
+}
+```
+
+Output: `1 2 3 4 5`
+
+### Classic For Loop (क्लासिक लूप)
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    for j := 1; j <= 5; j++ {  // शुरुआत, शर्त, वृद्धि
+        fmt.Println(j)
+    }
+}
+```
+
+Output: `1 2 3 4 5`
+
+### If-Else (शर्त के आधार पर)
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    num := 10
+    if num%2 == 0 {
+        fmt.Println("Even")    // सम संख्या
+    } else {
+        fmt.Println("Odd")     // विषम संख्या
+    }
+}
+```
+
+Output: `Even`
+
+### Switch-Case (कई विकल्पों में से चुनो)
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+    a := 5
+    switch a {
+    case 1:
+        fmt.Println("One")
+    case 5:
+        fmt.Println("Five")    // यह प्रिंट होगा
+    default:
+        fmt.Println("Other")
+    }
+}
+```
+
+Output: `Five`
