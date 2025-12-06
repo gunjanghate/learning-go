@@ -28,11 +28,11 @@ go run main.go
 - Prefer slices over arrays for most use cases; they're more flexible.
 - Understanding capacity helps optimize memory and avoid frequent reallocations.
 
-## Examples (सरल हिन्दी व्याख्या)
+## Examples
 
-नीचे बहुत ही बुनियादी उदाहरण दिए गए हैं ताकि सिंटैक्स समझ में आए। विस्तृत कोड पहले से `main.go` में मौजूद है।
+Below are very basic examples to help understand the syntax. The full examples are available in `main.go`.
 
-### Create a Slice (स्लाइस बनाओ)
+### Create a Slice
 
 ```go
 package main
@@ -40,13 +40,13 @@ package main
 import "fmt"
 
 func main() {
-    nums := make([]int, 0, 5)  // 0 एलिमेंट, 5 कैपेसिटी वाला स्लाइस
-    fmt.Println(len(nums))     // 0 (लंबाई)
-    fmt.Println(cap(nums))     // 5 (क्षमता)
+    nums := make([]int, 0, 5)  // slice with length 0 and capacity 5
+    fmt.Println(len(nums))     // 0 (length)
+    fmt.Println(cap(nums))     // 5 (capacity)
 }
 ```
 
-### Append Elements (एलिमेंट जोड़ो)
+### Append Elements
 
 ```go
 package main
@@ -55,13 +55,13 @@ import "fmt"
 
 func main() {
     nums := []int{1, 2}
-    nums = append(nums, 3)     // 3 को जोड़ो
-    nums = append(nums, 4, 5)  // 4, 5 को जोड़ो
+    nums = append(nums, 3)     // append a single value
+    nums = append(nums, 4, 5)  // append multiple values
     fmt.Println(nums)          // [1 2 3 4 5]
 }
 ```
 
-### Slice Operator (स्लाइस का एक हिस्सा निकालो)
+### Slice Operator
 
 ```go
 package main
@@ -70,12 +70,12 @@ import "fmt"
 
 func main() {
     a := []int{1, 2, 3, 4, 5}
-    b := a[1:3]                // इंडेक्स 1 से 2 तक
+    b := a[1:3]                // from index 1 up to 2
     fmt.Println(b)             // [2 3]
 }
 ```
 
-### Copy Slices (स्लाइस को कॉपी करो)
+### Copy Slices
 
 ```go
 package main

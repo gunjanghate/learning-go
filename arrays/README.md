@@ -27,11 +27,11 @@ go run main.go
 - Use arrays when you know the size ahead of time.
 - For dynamic collections, prefer slices.
 
-## Examples (सरल हिन्दी व्याख्या)
+## Examples
 
-नीचे बहुत ही बुनियादी उदाहरण दिए गए हैं ताकि सिंटैक्स समझ में आए। विस्तृत कोड पहले से `main.go` में मौजूद है।
+Below are very basic examples to help understand the syntax. The full examples are available in `main.go`.
 
-### Basic Array Declaration (बुनियादी ऐरे)
+### Basic Array Declaration
 
 ```go
 package main
@@ -39,16 +39,16 @@ package main
 import "fmt"
 
 func main() {
-    var nums [4]int         // 4 इंटेजर वाला ऐरे, सभी शून्य से शुरू
+    var nums [4]int         // 4-element integer array, initialized to zero values
     fmt.Println(nums)       // [0 0 0 0]
 
-    nums[0] = 10            // पहले एलिमेंट को असाइन करो
+    nums[0] = 10            // assign first element
     nums[1] = 20
     fmt.Println(nums)       // [10 20 0 0]
 }
 ```
 
-### Array with Initialization (ऐरे को तुरंत वैल्यू से भरो)
+### Array with Initialization
 
 ```go
 package main
@@ -56,13 +56,13 @@ package main
 import "fmt"
 
 func main() {
-    arr := [3]int{1, 2, 3}  // 3 एलिमेंट का ऐरे, सीधे वैल्यू दो
+    arr := [3]int{1, 2, 3}  // 3-element array initialized with values
     fmt.Println(arr)        // [1 2 3]
-    fmt.Println(len(arr))   // 3 (लंबाई)
+    fmt.Println(len(arr))   // 3 (length)
 }
 ```
 
-### Multi-dimensional Array ( 2D ऐरे)
+### Multi-dimensional Array (2D array)
 
 ```go
 package main

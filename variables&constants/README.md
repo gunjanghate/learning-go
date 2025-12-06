@@ -25,11 +25,11 @@ go run main.go
 - Prefer immutable values with `const` when appropriate.
 - Keep examples small and focused to highlight one concept at a time.
 
-## Examples 
+## Examples
 
-नीचे बहुत ही बुनियादी उदाहरण दिए गए हैं ताकि सिंटैक्स समझ में आए। विस्तृत कोड पहले से `main.go` में मौजूद है।
+Below are very basic examples to help understand the syntax. The full examples are available in `main.go`.
 
-### Variables 
+### Variables
 
 ```go
 package main
@@ -37,27 +37,26 @@ package main
 import "fmt"
 
 func main() {
-	var name string = "Gunjan"
-	var age int = 25
+	var name string = "Gunjan" // explicit type declaration
+	var age int = 25            // integer value
 
-	city := "Pune"
+	city := "Pune"             // short declaration with type inference
 
 	fmt.Println(name, age, city)
 }
 ```
 
-### Constants 
+### Constants
 
 ```go
 package main
 
 import "fmt"
 
-const(
-    AppName = "Learning Go"
-    Pi = 3.14
-    )
-
+const (
+	AppName = "Learning Go" // compile-time constant
+	Pi      = 3.14
+)
 
 func main() {
 	fmt.Println(AppName, Pi)

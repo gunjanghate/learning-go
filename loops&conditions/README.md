@@ -37,11 +37,11 @@ go run main.go
 - Use `for` uniformly; it's simpler than having multiple loop keywords.
 - Switch is often clearer than deeply nested if-else.
 
-## Examples (सरल हिन्दी व्याख्या)
+## Examples
 
-नीचे बहुत ही बुनियादी उदाहरण दिए गए हैं ताकि सिंटैक्स समझ में आए। विस्तृत कोड पहले से `main.go` में मौजूद है।
+Below are basic examples to help understand the syntax. The full examples are available in `main.go`.
 
-### While-Style Loop (जब तक लूप)
+### While-Style Loop
 
 ```go
 package main
@@ -50,16 +50,16 @@ import "fmt"
 
 func main() {
     i := 1
-    for i <= 5 {           // जब तक i 5 से कम या बराबर है
-        fmt.Println(i)     // i को प्रिंट करो
-        i++                // i को बढ़ाओ
+    for i <= 5 {           // loop while condition is true
+        fmt.Println(i)     // print i
+        i++                // increment i
     }
 }
 ```
 
 Output: `1 2 3 4 5`
 
-### Classic For Loop (क्लासिक लूप)
+### Classic For Loop
 
 ```go
 package main
@@ -67,7 +67,7 @@ package main
 import "fmt"
 
 func main() {
-    for j := 1; j <= 5; j++ {  // शुरुआत, शर्त, वृद्धि
+    for j := 1; j <= 5; j++ {  // init; condition; post
         fmt.Println(j)
     }
 }
@@ -75,7 +75,7 @@ func main() {
 
 Output: `1 2 3 4 5`
 
-### If-Else (शर्त के आधार पर)
+### If-Else
 
 ```go
 package main
@@ -85,16 +85,16 @@ import "fmt"
 func main() {
     num := 10
     if num%2 == 0 {
-        fmt.Println("Even")    // सम संख्या
+        fmt.Println("Even")    // even number
     } else {
-        fmt.Println("Odd")     // विषम संख्या
+        fmt.Println("Odd")     // odd number
     }
 }
 ```
 
 Output: `Even`
 
-### Switch-Case (कई विकल्पों में से चुनो)
+### Switch-Case
 
 ```go
 package main
@@ -107,7 +107,7 @@ func main() {
     case 1:
         fmt.Println("One")
     case 5:
-        fmt.Println("Five")    // यह प्रिंट होगा
+        fmt.Println("Five")    // this will print
     default:
         fmt.Println("Other")
     }
