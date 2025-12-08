@@ -17,7 +17,7 @@ func changeNum(num int) {  // taking by value
 }
 
 func changeNumByRef(num *int) {  // taking by reference
-	*num = 30
+	*num = 30 // dereferencing pointer to get the value
 	fmt.Println("In changeNumByRef: " ,*num)
 }
 
