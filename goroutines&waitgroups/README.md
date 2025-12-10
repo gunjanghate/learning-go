@@ -71,6 +71,18 @@ The order is not guaranteed because the tasks run concurrently.
 - Avoid using `time.Sleep` just to wait for goroutines; `WaitGroup` is the correct tool for this pattern.
 - Each goroutine gets its own stack that can grow and shrink, which is why they are lightweight.
 
+## Common `defer` Use Cases
+
+In this example, `defer w.Done()` ensures the WaitGroup is always signaled, even if the function exits early. The same pattern is critical in many real-world scenarios:
+
+| Use Case                                     | Why it's Critical              |
+| -------------------------------------------- | ------------------------------ |
+| 🔐 `Unlock()` mutex                          | Prevent deadlocks              |
+| 🔌 `Close()` DB rows / files / network conns | Prevent resource leaks         |
+| 📊 Tracing / metrics                         | Guaranteed logging             |
+| 🔄 Cleanup operations                        | Makes code safe + maintainable |
+| 🧯 panic recovery                            | Stabilizes API services        |
+
 ## Small Example (simplified)
 
 ```go
