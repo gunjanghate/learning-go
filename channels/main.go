@@ -43,9 +43,6 @@ func emailSender(emailChan <-chan string, done chan<- bool){ // emailChan is a r
 		fmt.Println("Sending email to:", email)
 		time.Sleep(time.Second)
 	}
-
-	
-	
 }
 func main() {
 
@@ -136,6 +133,7 @@ go func(){
 go func(){
 	chan2 <- "hello"
 }()
+
 
 for i:= 0; i<2; i++{
 	select{

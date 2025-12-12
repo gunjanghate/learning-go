@@ -13,6 +13,11 @@ import (
 // when a goroutine is blocked, the scheduler will schedule another goroutine onto the same OS thread
 // goroutines communicate using channels
 
+
+// waitgroups are used to wait for a collection of goroutines to finish
+// a waitgroup has a counter that is incremented when a goroutine is started and decremented when a goroutine is finished
+// the main goroutine can wait for all goroutines to finish by calling Wait on the waitgroup
+
 func tasks(id int, w *sync.WaitGroup) {
 	defer w.Done() // defer: ensure that Done is called when the function exits
 	fmt.Println("Task", id, "is starting")
@@ -47,6 +52,8 @@ func main() {
 // Task 2 is starting
 // Task 0 is starting
 // Task 1 is starting
+
+
 
 
 
