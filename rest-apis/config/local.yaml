@@ -4,4 +4,4 @@ http_server:
   address: "localhost:8080"
 
 # here you can add more configuration settings as needed
-#  for example, database settings, logging levels, etc.
+# for example, database settings, logging levels, etc.
