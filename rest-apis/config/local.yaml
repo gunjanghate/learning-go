@@ -1,0 +1,7 @@
+env: "dev"
+storage_path : "storage/storage.db"
+http_server:
+  address: "localhost:8080"
+
+# here you can add more configuration settings as needed
+#  for example, database settings, logging levels, etc.
