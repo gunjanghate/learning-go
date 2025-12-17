@@ -13,6 +13,7 @@ import (
 
 	"github.com/gunjanghate/learning-go/internal/config"
 	"github.com/gunjanghate/learning-go/internal/http/handlers/student"
+	"github.com/gunjanghate/learning-go/internal/storage/sqllite"
 )
 
 func main() {
@@ -20,38 +21,45 @@ func main() {
 	fmt.Println("Starting Students API...")
 	// load config
 	cfg := config.MustLoad()
+
+	storage, err := sqllite.New(*cfg)
+	if err != nil {
+		log.Fatal("Error setting up storage:", err)
+	}
+
+	slog.Info("Storage setup completed", slog.String("env", cfg.Env), slog.String("version", "1.0.0"))
+
+
 	// fmt.Printf("Loaded config: %+v\n", cfg)
 	// databse setup
 	// setup router
 	router := http.NewServeMux()
 
-	router.HandleFunc("POST /api/students", student.New() )
+	router.HandleFunc("POST /api/students", student.New(storage))
 	// setup server
 
 	server := http.Server{
-		Addr: cfg.Addr,
+		Addr:    cfg.Addr,
 		Handler: router,
 	}
 	slog.Info("Server Started", slog.String("address", cfg.HTTPServer.Addr))
 	fmt.Printf("Server Started at %s", cfg.HTTPServer.Addr)
-    // garcefully shutdown
-    done := make(chan os.Signal, 1)
-
+	// garcefully shutdown
+	done := make(chan os.Signal, 1)
 
 	signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 	// Interrupt will occurr if user presses Ctrl+C or the process receives a termination signal
 	// SIGINT and SIGTERM are specific types of termination signals
-	go func(){
+	go func() {
 
 		err := server.ListenAndServe()
-	
-		if err != nil{
+
+		if err != nil {
 			log.Fatal("Error starting server:", err)
 		}
 	}()
 
-
-	<- done
+	<-done
 
 	// log an informational message indicating shutdown has startedful shutdown by signal.Notify
 	slog.Info("shutting down the server")
@@ -59,19 +67,15 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	// ensure the cancel function is called to release resources when the function returns
 	defer cancel()
-	
+
 	// attempt to gracefully shut down the server using the context timeout
-	err := server.Shutdown(ctx)
+	errr := server.Shutdown(ctx)
 	// if shutdown returned an error, log it with a structured "error" field
-	if err != nil {
-		slog.Error("error during server shutdown", slog.String("error", err.Error()))
+	if errr != nil {
+		slog.Error("error during server shutdown", slog.String("error", errr.Error()))
 	}
 	// log that the server has been stopped
 	slog.Info("server stopped")
 	slog.Info("server stopped")
-
-
-
-
 
 }
