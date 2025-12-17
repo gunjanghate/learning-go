@@ -7,7 +7,7 @@ import (
 	"io"
 	"log/slog"
 	"net/http"
-
+	
 	"github.com/go-playground/validator/v10"
 	"github.com/gunjanghate/learning-go/internal/storage"
 	"github.com/gunjanghate/learning-go/internal/types"
@@ -49,7 +49,6 @@ func New(storage storage.Storage) http.HandlerFunc {
 			stu.Email,
 			stu.Age,
 		)
-
 		slog.Info("Student created with ID", slog.Int64("id", lastId))
 
 		if err != nil {

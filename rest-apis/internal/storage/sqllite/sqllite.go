@@ -58,5 +58,5 @@ func (s *Sqllite) CreateStudent(name string, email string, age int) (int64, erro
 	
 	
 	return lastid, nil
-	// return 0, nil
+
 }
