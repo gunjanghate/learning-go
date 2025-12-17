@@ -2,6 +2,9 @@ package sqllite
 
 import (
 	"database/sql"
+	"fmt"
+
+	"github.com/gunjanghate/learning-go/internal/types"
 
 	"github.com/gunjanghate/learning-go/internal/config"
 	_ "github.com/mattn/go-sqlite3"
@@ -59,4 +62,52 @@ func (s *Sqllite) CreateStudent(name string, email string, age int) (int64, erro
 	
 	return lastid, nil
 
+}
+
+
+func (s *Sqllite) GetStudentById(id int64) (types.Student, error){
+	stmt, err := s.Db.Prepare("SELECT * FROM students where id = ? LIMIT 1")
+	if err != nil {
+		return types.Student{}, err
+	}
+
+	defer stmt.Close()
+
+	var student types.Student
+
+	err = stmt.QueryRow(id).Scan(&student.Id, &student.Name, &student.Email, &student.Age)
+	if err != nil {
+		if err == sql.ErrNoRows{
+			return types.Student{}, fmt.Errorf("student with id %d not found", id)
+		}
+		return types.Student{}, fmt.Errorf("query err : %q", err)
+	}
+	return student, nil
+}
+
+
+func (s *Sqllite) GetStudents() ([]types.Student, error){
+	stmt, err := s.Db.Prepare("SELECT * FROM students")
+	if err != nil {
+		return nil, err
+	}
+
+	defer stmt.Close()
+
+	rows, err := stmt.Query()
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var students []types.Student
+	
+	for rows.Next(){
+		var student types.Student
+		err := rows.Scan(&student.Id, &student.Name, &student.Email, &student.Age)
+		if err != nil {
+			return nil, err
+		}
+		students = append(students, student)
+	}
+	return students, nil
 }

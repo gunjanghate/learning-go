@@ -7,7 +7,8 @@ import (
 	"io"
 	"log/slog"
 	"net/http"
-	
+	"strconv"
+
 	"github.com/go-playground/validator/v10"
 	"github.com/gunjanghate/learning-go/internal/storage"
 	"github.com/gunjanghate/learning-go/internal/types"
@@ -60,5 +61,44 @@ func New(storage storage.Storage) http.HandlerFunc {
 		// response.WriteJson(w, http.StatusCreated, map[string]string{"success": "OK", "name": stu.Name, "email": stu.Email})
 		response.WriteJson(w, http.StatusCreated, map[string]int{"id": int(lastId)})
 
+	}
+}
+
+
+func GetById(storage storage.Storage) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		slog.Info("Handling request for /api/students/{id}")
+		id := r.PathValue("id")
+		slog.Info("Fetching student with ID", slog.String("id", id))
+		
+		intId , err := strconv.ParseInt(id, 10, 64)
+		if err != nil {
+			response.WriteJson(w, http.StatusBadRequest, response.GenError(fmt.Errorf("invalid id format")))
+			slog.Error("error parsing id", slog.String("error", err.Error()))
+			return
+		}
+		student, err := storage.GetStudentById(intId)
+		if err != nil {
+			response.WriteJson(w, http.StatusInternalServerError, response.GenError(err))
+			slog.Error("error fetching student", slog.String("error", err.Error()))
+			return
+		}
+
+		response.WriteJson(w, http.StatusOK, student)
+	}
+}
+
+func GetList(storage storage.Storage) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		slog.Info("Handling request for /api/students/")
+
+		students,  err := storage.GetStudents()
+	
+		if err != nil {
+			response.WriteJson(w, http.StatusInternalServerError, response.GenError(err))
+			slog.Error("error fetching students", slog.String("error", err.Error()))
+			return
+		}
+		response.WriteJson(w, http.StatusOK, students)
 	}
 }
