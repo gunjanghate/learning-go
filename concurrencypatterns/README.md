@@ -7,7 +7,8 @@ This folder demonstrates two common concurrency patterns in Go using goroutines,
 
 It also includes a diagram to visualize how jobs and workers interact.
 
-![Concurrency Patterns Diagram](diagrams.png)
+![G8Jk1Haa8AA-3vZ](https://github.com/user-attachments/assets/6c9073db-72b6-4403-ba2a-d0158f5ced26)
+
 
 ## What's Inside
 
